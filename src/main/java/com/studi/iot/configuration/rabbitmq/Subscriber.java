@@ -2,7 +2,9 @@ package com.studi.iot.configuration.rabbitmq;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.studi.iot.pojo.Ampoule;
 import com.studi.iot.pojo.Temperature;
+import com.studi.iot.service.AmpouleService;
 import com.studi.iot.service.TemperatureService;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
@@ -16,6 +18,10 @@ public class Subscriber {
 
     @Autowired
     private TemperatureService temperatureService;
+
+    @Autowired
+    private AmpouleService ampouleService;
+
 
     @RabbitListener(queues="temperature")
     public void receivedTemperature(String message) {
@@ -31,6 +37,22 @@ public class Subscriber {
 
         if(maTemperature != null){
             temperatureService.createTemperature(maTemperature);
+        }
+    }
+
+    @RabbitListener(queues="ampoule")
+    public void receivedAmpoule(String message) {
+
+        Ampoule monAmpoule = null;
+
+        try {
+            monAmpoule = objectMapper.readValue(message, Ampoule.class);
+        }catch (JsonProcessingException e) {
+            System.out.println("Le message n'est pas une temperature!");
+        }
+
+        if(monAmpoule != null){
+            ampouleService.createAmpoule(monAmpoule);
         }
     }
 

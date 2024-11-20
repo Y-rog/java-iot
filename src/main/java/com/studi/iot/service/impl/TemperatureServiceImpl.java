@@ -6,6 +6,8 @@ import com.studi.iot.service.TemperatureService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class TemperatureServiceImpl implements TemperatureService {
 
@@ -21,5 +23,10 @@ public class TemperatureServiceImpl implements TemperatureService {
     public void createTemperature(Temperature temperature) {
         temperatureRepository.save(temperature);
 
+    }
+
+    @Override
+    public List<Temperature> getAllTemperatures() {
+        return (List<Temperature>) temperatureRepository.findAll();
     }
 }
