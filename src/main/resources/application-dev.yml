@@ -1,0 +1,22 @@
+spring:
+  rabbitmq:
+    host: 127.0.0.1
+    port: 5672
+    username: user
+    password: rabbit_password
+  datasource:
+    url=jdbc: mariadb://localhost/iot_bdd
+    username: iot_app
+    password: iot_password&Studi
+
+rabbit:
+  ROUTING_KEY_NAME: iot
+  EXCHANGE_NAME: studi
+
+security:
+  jwt:
+    secret-key: $2y$10$/Bo634i2s6cvyWaBP7/lvenHfZl6BThuWf1YB3HR7lAXotjpACIJK
+    expiration: 60000 #86400000 # a day
+    refresh-token:
+      expiration: 604800000 # 7 days
+

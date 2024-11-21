@@ -30,4 +30,10 @@ public class Temperature {
     public Temperature() {
         //Constructeur vide pour Spring
     }
+
+    public boolean equals(Temperature obj) {
+        return this.id.equals(obj.getId()) &&
+                this.dateCollecte.equals(obj.getDateCollecte()) &&
+                this.temperature.equals(obj.getTemperature());
+    }
 }

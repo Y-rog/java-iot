@@ -1,6 +1,5 @@
 package com.studi.iot;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.studi.iot.pojo.Temperature;
 import org.junit.jupiter.api.Test;
@@ -16,7 +15,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest
-class IotApplicationTests {
+class TemperatureTests {
 
     // SmoketTest : vérification que les controllers (ws) fonctionner
     // Test unitaire (= mock pour une API) : test d'une fonctionnalité
@@ -54,8 +53,12 @@ class IotApplicationTests {
     }
 
     @Test
-    public void getTemperature() {
+    public void getTemperature() throws Exception {
+        MvcResult mvcResult = (MvcResult) mockMvc.perform(
+                get("/temperature/" + this.temperature.getId())
+        );
 
+        objectMapper.readValue(mvcResult.getResponse().getContentAsString(),Temperature.class);
     }
 
     @Test
