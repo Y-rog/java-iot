@@ -4,7 +4,9 @@ import com.studi.iot.pojo.Ampoule;
 import com.studi.iot.repository.AmpouleRepository;
 import com.studi.iot.service.AmpouleService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
 public class AmpouleServiceImpl implements AmpouleService {
 
     @Autowired
